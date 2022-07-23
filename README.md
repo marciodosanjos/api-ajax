@@ -1,2 +1,2 @@
 # pratica-api-ajax
-Prática de consumo de API do Github
+Consumindo dados da API do Github com AJAX
