@@ -9,35 +9,106 @@
     <script type="text/javascript" src="script.js"></script>
 </head>
 
-<section class="container">
-    <div class="description">
-        <h1 id="title">Caçando os usuários do Github</h1>
-        <p>O Github permite pesquisar usuários por meio de sua API. Digite um nome de usuário e veja se ele existe na
-            base da plataforma</p>
-    </div>
-    <form action="" id="form">
 
-        <input id="user" type="text" placeholder="Digite um usuário">
-        <button class="btn" id="btn">Pesquisar</button>
-    </form>
-
-    <div id="titleResult"></div>
-
-    <div id="img">
-        <div id="result">
-
-        </div>
-
-        <div id="userResult">
-
-        </div>
-
-    </div>
-</section>
 
 
 <body>
+    <section class="container">
+        <div class="description">
+            <h1 id="title">Caçando os usuários do Github</h1>
+            <p>O Github permite pesquisar usuários por meio de sua API. Digite um nome de usuário e veja se ele existe
+                na
+                base da plataforma</p>
+        </div>
+        <form action="" id="form">
 
+            <input id="user" type="text" placeholder="Digite um usuário">
+            <button class="btn" id="btn">Pesquisar</button>
+        </form>
+
+        <div id="titleResult"></div>
+
+        <div id="img">
+            <div id="result">
+
+            </div>
+
+            <div id="userResult">
+
+            </div>
+
+        </div>
+    </section>
+    <script>
+        const submit = document.querySelector("#form");
+        const user = document.querySelector("#user")
+
+        submit.onsubmit = function (e) {
+            e.preventDefault();
+            const url = `https://api.github.com/users/${user.value}`;
+
+            fetch(url)
+                .then((dados) => dados.json())
+                .then((user) => {
+
+                    submit.onclick = function () {
+                        location.reload();
+                    }
+
+                    if (!user.id) {
+                        console.log("Usuário não encontrado");
+                        //gerando título para resultado negativo//
+                        let h2 = document.createElement('h2');
+                        h2.innerHTML = "Usuário não existe. Faça uma nova busca";
+                        h2.style.color = "White";
+                        h2.style.marginBottom = "20px";
+                        document.getElementById('titleResult').appendChild(h2);
+
+                    } else {
+
+                        console.log(user.id);
+
+                        //gerando título para resultado//
+                        let h2 = document.createElement('h2');
+                        h2.innerHTML = "Resultado";
+                        h2.style.color = "White";
+                        h2.style.marginBottom = "20px";
+                        document.getElementById('titleResult').appendChild(h2);
+
+                        //  trazendo foto do usuário //
+                        console.log(user.avatar_url)
+                        let foto = document.createElement('img');
+                        foto.src = user.avatar_url;
+                        foto.style.width = "150px";
+                        foto.style.height = "150px";
+                        foto.style.borderRadius = "50%";
+                        document.getElementById('img').appendChild(foto);
+
+                        //trazendo nome do usuário//
+                        let name = document.createElement('h3');
+                        name.innerHTML = user.name;
+                        name.style.color = "White";
+                        document.getElementById('userResult').appendChild(name);
+
+                        //trazendo bio do usuário//
+                        let bio = document.createElement('p');
+                        bio.innerHTML = user.bio;
+                        name.style.color = "white";
+                        document.getElementById('userResult').appendChild(bio);
+
+                        //trazendo link do usuário//
+                        let link = document.createElement('a');
+                        link.innerHTML = "<strong>Confira o perfil do usuário</strong>";
+                        link.href = user.html_url;
+                        link.style.color = "white";
+                        document.getElementById('userResult').appendChild(link);
+                    }
+
+
+                });
+
+        };
+    </script>
 </body>
 
 </html>
