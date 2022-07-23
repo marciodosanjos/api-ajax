@@ -1,2 +1,5 @@
-# pratica-api-ajax
-Consumindo dados da API do Github com AJAX
+# Exercise Consuming data from an API with AJAX
+
+Consuming data from the Github API with AJAX.
+
+Langagues: HTML, CSS, Javascript.
