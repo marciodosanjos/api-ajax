@@ -1,5 +1,3 @@
-# Consuming data from an API with AJAX
+# Data fetching to Github API with AJAX
 
-Consuming data from the Github API with AJAX.
-
-Langagues: HTML, CSS, Javascript.
+Tech Stack: HTML, CSS, Javascript.
